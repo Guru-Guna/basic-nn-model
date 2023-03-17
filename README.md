@@ -105,10 +105,10 @@ ai.predict(x_n_n)
 
 ## Dataset Information
 
-Include screenshot of the dataset
+![](output1.png)
 
 ## OUTPUT
-![](output1.png)
+
 
 ### Training Loss Vs Iteration Plot
 ![](output2.png)
