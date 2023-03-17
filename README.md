@@ -6,11 +6,11 @@ To develop a neural network regression model for the given dataset.
 
 ## THEORY
 
-Explain the problem statement
+First we can take the dataset based on one input value and some mathematical calculus output value.Next define the neural network model in three layers.First layer has six neurons and second layer has four neurons,third layer has one neuron.The neural network model takes the input and produces the actual output using regression.
 
 ## Neural Network Model
 
-Include the neural network model diagram.
+![](.ipynb_checkpoints\neural.png)
 
 ## DESIGN STEPS
 
@@ -44,24 +44,82 @@ Evaluate the model with the testing data.
 
 ## PROGRAM
 
-Include your code here
+# Developed By: Gunaseelan G
+# Register Number: 212220230031
+```
+from google.colab import auth
+import gspread
+from google.auth import default
+
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import MinMaxScaler
+import matplotlib.pyplot as plt
+
+from tensorflow.keras.models import Sequential as Seq
+from tensorflow.keras.layers import Dense as Den
+from tensorflow.keras.metrics import RootMeanSquaredError as rmse
+
+auth.authenticate_user()
+creds, _ = default()
+gc = gspread.authorize(creds)
+
+sheet = gc.open('Multiple').sheet1 
+rows = sheet.get_all_values()
+
+df = pd.DataFrame(rows[1:], columns=rows[0])
+df = df.astype({'Table':'int'})
+df = df.astype({'Product':'int'})
+
+x = df[["Table"]] .values
+y = df[["Product"]].values
+
+scaler = MinMaxScaler()
+scaler.fit(x)
+x_n = scaler.fit_transform(x)
+
+x_train,x_test,y_train,y_test = train_test_split(x_n,y,test_size = 0.3,random_state = 3)
+
+ai = Seq([
+    Den(8,activation = 'relu',input_shape=[1]),
+    Den(15,activation = 'relu'),
+    Den(1),
+])
+
+ai.compile(optimizer = 'rmsprop',loss = 'mse')
+
+ai.fit(x_train,y_train,epochs=2000)
+ai.fit(x_train,y_train,epochs=2000)
+
+loss_plot = pd.DataFrame(ai.history.history)
+loss_plot.plot()
+
+err = rmse()
+preds = ai.predict(x_test)
+err(y_test,preds)
+
+x_n1 = [[30]]
+x_n_n = scaler.transform(x_n1)
+ai.predict(x_n_n)
+```
 
 ## Dataset Information
 
 Include screenshot of the dataset
 
 ## OUTPUT
+![](output1.png)
 
 ### Training Loss Vs Iteration Plot
-
-Include your plot here
+![](output2.png)
 
 ### Test Data Root Mean Squared Error
 
-Find the test data root mean squared error
+![](output3.png)
 
 ### New Sample Data Prediction
 
-Include your sample input and output here
+![](output4.png)
 
 ## RESULT
+Thus a neural network regression model for the given dataset is written and executed successfully
