@@ -9,8 +9,9 @@ To develop a neural network regression model for the given dataset.
 First we can take the dataset based on one input value and some mathematical calculus output value.Next define the neural network model in three layers.First layer has six neurons and second layer has four neurons,third layer has one neuron.The neural network model takes the input and produces the actual output using regression.
 
 ## Neural Network Model
+![network](https://user-images.githubusercontent.com/93427255/226674946-274a216c-bae1-4d11-b59e-51eef320d5e5.png)
 
-![](.ipynb_checkpoints\neural.png)
+
 
 ## DESIGN STEPS
 
@@ -64,15 +65,15 @@ auth.authenticate_user()
 creds, _ = default()
 gc = gspread.authorize(creds)
 
-sheet = gc.open('Multiple').sheet1 
+sheet = gc.open('deeplearning').sheet1 
 rows = sheet.get_all_values()
 
 df = pd.DataFrame(rows[1:], columns=rows[0])
-df = df.astype({'Table':'int'})
-df = df.astype({'Product':'int'})
+df = df.astype({'Input':'int'})
+df = df.astype({'Output':'int'})
 
-x = df[["Table"]] .values
-y = df[["Product"]].values
+x = df[["Input"]] .values
+y = df[["Output"]].values
 
 scaler = MinMaxScaler()
 scaler.fit(x)
@@ -97,29 +98,33 @@ loss_plot.plot()
 err = rmse()
 preds = ai.predict(x_test)
 err(y_test,preds)
-
 x_n1 = [[30]]
 x_n_n = scaler.transform(x_n1)
 ai.predict(x_n_n)
+
 ```
 
 ## Dataset Information
+![output1](https://user-images.githubusercontent.com/93427255/226675068-ca338ea2-3c7a-4307-9829-ee053871d1f0.png)
 
-![](output1.png)
 
 ## OUTPUT
 
 
+
 ### Training Loss Vs Iteration Plot
-![](output2.png)
+![output2](https://user-images.githubusercontent.com/93427255/226675196-61b71965-3895-4713-8583-260de7b5f5b5.png)
+
 
 ### Test Data Root Mean Squared Error
 
-![](output3.png)
+![output3](https://user-images.githubusercontent.com/93427255/226675252-977dbb8c-d779-412a-8e31-b88b5a4b290b.png)
+
 
 ### New Sample Data Prediction
 
-![](output4.png)
+![output4](https://user-images.githubusercontent.com/93427255/226675295-7fde71ac-2d70-46d5-8457-ccff37db0aab.png)
+
 
 ## RESULT
 Thus a neural network regression model for the given dataset is written and executed successfully
